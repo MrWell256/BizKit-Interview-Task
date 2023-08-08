@@ -38,7 +38,10 @@ def search_users(args):
 
     if "age" in args:
         age_to_search = int(args["age"])
-        searched_users += [user for user in current_users if int(user["age"]) == age_to_search - 1]
+        minus_one = [user for user in current_users if int(user["age"]) == age_to_search - 1]
+        for user in minus_one:
+            if user["id"] not in (u["id"] for u in searched_users):
+                searched_users.append(user)
 
         searched_age = [user for user in current_users if int(user["age"]) == age_to_search]
         for user in searched_age:
